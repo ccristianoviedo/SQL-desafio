@@ -2,9 +2,9 @@ const { options } = require("./options/sqliteDB");
 const knex = require("knex")(options);
 
 const cars = [
-  { name: "Ferrari", price: 200000 },
-  { name: "Bugatti", price: 1000000 },
-  { name: "Porsche", price: 50000 },
+  { name: "Ferrari", price: 20, color: "amarillo"},
+  { name: "Bugatti", price: 10, color: "rojo" },
+  { name: "Porsche", price: 50, color: "amarillo" },
 ];
 
 knex("cars")
