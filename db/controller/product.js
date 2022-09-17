@@ -1,4 +1,4 @@
-const { options } = require("./options/sqliteDB");
+const { options } = require("../../options/sqliteDB");
 const knex = require("knex")(options);
 
 class Contenedor {

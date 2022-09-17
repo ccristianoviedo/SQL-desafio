@@ -2,6 +2,8 @@ const express= require("express");
 const {Server: IOServer} = require("socket.io");
 const {Server: HttpServer} = require("http");
 const Messages = require("./db/controller/messages")
+const { optionsa } = require("./options/sqliteMessages");
+const knex = require("knex")(optionsa);
 
 const app = express();
 const httpServer =  new HttpServer(app);
@@ -27,10 +29,19 @@ io.on('connection', (socket) => {
 })
 app.get("/guardar",(req, res) => { 
    
-    res.send(Messages.insert(messages))
-     
+    knex("messages")
+    .insert(messages)
+    .then(() => {
+        console.log("mensajes insertados");
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+    .finally(() => {
+        knex.destroy();
+    });       
+    
 });   
  
   
-// El servidor funcionando en el puerto 3000
 httpServer.listen(8080, () => console.log('SERVER ON PORT 8080'))
